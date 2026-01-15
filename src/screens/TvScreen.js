@@ -1,4 +1,4 @@
-import { Text, FlatList, ScrollView } from 'react-native';
+import { Text, FlatList, ScrollView, StyleSheet } from 'react-native';
 import { useEffect, useState } from 'react';
 import { fetchTvShows } from '../api/TvApi';
 import TvCard from '../components/TvCard';
@@ -17,39 +17,64 @@ export default function TvScreen() {
   }, []);
 
   return (
-    <ScrollView style={{ padding: 10 }}>
-      <Text>Airing Today</Text>
+    <ScrollView style={styles.container}>
+      <Text style={styles.sectionTitle}>Airing Today</Text>
       <FlatList
         data={airingToday}
         horizontal
+        showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <TvCard show={item} />}
+        style={styles.list}
       />
 
-      <Text>On The Air</Text>
+      <Text style={styles.sectionTitle}>On The Air</Text>
       <FlatList
         data={onTheAir}
         horizontal
+        showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <TvCard show={item} />}
+        style={styles.list}
       />
 
-      <Text>Popular</Text>
+      <Text style={styles.sectionTitle}>Popular</Text>
       <FlatList
         data={popular}
         horizontal
+        showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <TvCard show={item} />}
+        style={styles.list}
       />
 
-      <Text>Top Rated</Text>
+      <Text style={styles.sectionTitle}>Top Rated</Text>
       <FlatList
         data={topRated}
         horizontal
+        showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <TvCard show={item} />}
+        style={styles.list}
       />
     </ScrollView>
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000',
+    padding: 10,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 15,
+    marginBottom: 10,
+    color: '#fff',
+  },
+  list: {
+    marginBottom: 10,
+  },
+});

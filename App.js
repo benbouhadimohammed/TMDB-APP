@@ -1,4 +1,5 @@
 
+
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTabs from './src/navigation/BottomTabs';
 import { FavouritesProvider } from './src/context/FavouritesContext';

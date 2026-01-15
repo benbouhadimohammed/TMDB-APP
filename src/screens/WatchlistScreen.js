@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View, StyleSheet } from 'react-native';
 import { useContext } from 'react';
 import { WatchlistContext } from '../context/WatchlistContext';
 import MovieCard from '../components/MovieCard';
@@ -8,18 +8,42 @@ export default function WatchlistScreen() {
 
   if (watchlist.length === 0) {
     return (
-      <View style={{ padding: 20 }}>
-        <Text>No items in watchlist yet ➕</Text>
+      <View style={styles.emptyContainer}>
+        <Text style={styles.emptyText}>No items in watchlist yet ➕</Text>
       </View>
     );
   }
 
   return (
-    <FlatList
-      data={watchlist}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => <MovieCard movie={item} />}
-    />
+    <View style={styles.container}>
+      <FlatList
+        data={watchlist}
+        numColumns={3}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <MovieCard movie={item} />}
+        contentContainerStyle={styles.listContent}
+      />
+    </View>
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000',
+  },
+  emptyContainer: {
+    flex: 1,
+    backgroundColor: '#000',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  emptyText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  listContent: {
+    padding: 10,
+  },
+});
